@@ -122,13 +122,6 @@ nav .links .navlink{display:none}
 .hero-stats .s{flex:1 1 140px;padding-right:20px}
 .hero-stats .s .n{font-family:var(--disp);font-size:clamp(1.7rem,3vw,2.5rem);line-height:1;font-weight:400}
 .hero-stats .s .l{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-ink-dim);margin-top:9px}
-.scrollcue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--on-ink-faint);display:none;flex-direction:column;align-items:center;gap:8px;z-index:1;pointer-events:none}
-.scrollcue .bar{width:1px;height:34px;background:linear-gradient(var(--on-ink-faint),transparent);position:relative;overflow:hidden}
-.scrollcue .bar::after{content:"";position:absolute;top:-100%;left:0;width:1px;height:100%;background:var(--ember);animation:drop 2s var(--ease) infinite}
-@keyframes drop{0%{top:-100%}60%,100%{top:100%}}
-/* only show the scroll cue where there's genuine room below the hero stats */
-@media(min-width:1000px) and (min-height:840px){.scrollcue{display:flex}}
 @media(min-width:1000px){
   .hero-grid{grid-template-columns:1.35fr .85fr;gap:60px}
   .hero-portrait{justify-self:end;width:min(38vw,460px)}
@@ -328,7 +321,6 @@ nav .links .navlink{display:none}
     <div class="s reveal" data-d="160"><div class="n">2021</div><div class="l">ContentCal acquired by Adobe</div></div>
     <div class="s reveal" data-d="240"><div class="n"><span class="count" data-to="130" data-suf="K+">0</span></div><div class="l">Readers &amp; followers</div></div>
   </div>
-  <div class="scrollcue"><span>Scroll</span><span class="bar"></span></div>
 </header>
 
 <!-- INTRO -->
