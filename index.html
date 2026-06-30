@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,21 +12,18 @@
 <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
 
-<!-- Open Graph / social share.
-     NOTE: og:image / twitter:image should be ABSOLUTE URLs for most scrapers
-     (Twitter/X, LinkedIn, Facebook, Slack). Once the live domain is known,
-     change the two image URLs below to e.g. https://alexpackham.com/og-image.jpg -->
+<!-- Open Graph / social share. -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="Alex Packham — Founder. Investor. Builder.">
 <meta property="og:description" content="Entrepreneur, investor, creator. Built and sold ContentCal to Adobe; backed 60+ companies. Writes Venture Wisely.">
-<meta property="og:image" content="og-image.jpg">
+<meta property="og:image" content="https://alexpackham.com/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Alex Packham — Entrepreneur, investor, creator.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Alex Packham — Founder. Investor. Builder.">
 <meta name="twitter:description" content="Entrepreneur, investor, creator. Built and sold ContentCal to Adobe; backed 60+ companies. Writes Venture Wisely.">
-<meta name="twitter:image" content="og-image.jpg">
+<meta name="twitter:image" content="https://alexpackham.com/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -125,10 +123,12 @@ nav .links .navlink{display:none}
 .hero-stats .s .n{font-family:var(--disp);font-size:clamp(1.7rem,3vw,2.5rem);line-height:1;font-weight:400}
 .hero-stats .s .l{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--on-ink-dim);margin-top:9px}
 .scrollcue{position:absolute;bottom:24px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:10px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--on-ink-faint);display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2}
+  text-transform:uppercase;color:var(--on-ink-faint);display:none;flex-direction:column;align-items:center;gap:8px;z-index:1;pointer-events:none}
 .scrollcue .bar{width:1px;height:34px;background:linear-gradient(var(--on-ink-faint),transparent);position:relative;overflow:hidden}
 .scrollcue .bar::after{content:"";position:absolute;top:-100%;left:0;width:1px;height:100%;background:var(--ember);animation:drop 2s var(--ease) infinite}
 @keyframes drop{0%{top:-100%}60%,100%{top:100%}}
+/* only show the scroll cue where there's genuine room below the hero stats */
+@media(min-width:1000px) and (min-height:840px){.scrollcue{display:flex}}
 @media(min-width:1000px){
   .hero-grid{grid-template-columns:1.35fr .85fr;gap:60px}
   .hero-portrait{justify-self:end;width:min(38vw,460px)}
@@ -269,6 +269,15 @@ nav .links .navlink{display:none}
 .por-reveal{clip-path:inset(0 0 100% 0);transition:clip-path 1.2s var(--ease) .35s}
 .loaded .por-reveal{clip-path:inset(0 0 0 0)}
 
+/* ---------- mobile footer / contact tightening ---------- */
+@media(max-width:680px){
+  .contact{padding-top:clamp(64px,11vh,110px);padding-bottom:36px}
+  .contact-cta{margin-top:34px}
+  .foot{margin-top:48px;flex-direction:column;align-items:flex-start;gap:20px;padding-top:22px}
+  .foot .fl{gap:16px 20px}
+  .contact-mark{width:min(52vw,190px);bottom:0;opacity:.06}
+}
+
 @media (prefers-reduced-motion:reduce){
   *{animation:none!important;transition-duration:.001s!important}
   .reveal,.fade-up{opacity:1;transform:none}.line-mask>span{transform:none}.por-reveal{clip-path:none}
@@ -335,7 +344,7 @@ nav .links .navlink{display:none}
       <div class="intro-side reveal" data-d="120">
         <p>Alex is a serial entrepreneur, operator and investor. He founded <b>ContentCal</b>, scaled it, and sold it to <b>Adobe</b>, then spent three years leading its integration from the inside.</p>
         <p>Today he's <b>CEO of JAAQ</b>, a behavioural-health company; co-founder of <b>AcademyAI</b>; and an advisor and investor across <b>60+ businesses</b> through ASTP Ventures.</p>
-        <p>He writes Venture Wisely essays on building real success and the realities of building a business.</p>
+        <p>He writes Venture Wisely essays on building real success and the realities of building a business.</p>
         <div class="sig">— Alex Packham</div>
       </div>
     </div>
@@ -480,10 +489,10 @@ nav .links .navlink{display:none}
   <div class="foot">
     <div class="fl"><span>© <span id="yr"></span> Alex Packham</span></div>
     <div class="fl">
-      <a href="https://www.instagram.com/" target="_blank" rel="noopener" data-cursor>Instagram</a>
-      <a href="https://www.tiktok.com/" target="_blank" rel="noopener" data-cursor>TikTok</a>
+      <a href="https://www.instagram.com/astpackham/" target="_blank" rel="noopener" data-cursor>Instagram</a>
+      <a href="https://www.tiktok.com/@alexpackham" target="_blank" rel="noopener" data-cursor>TikTok</a>
       <a href="https://www.linkedin.com/in/alexpackham/" target="_blank" rel="noopener" data-cursor>LinkedIn</a>
-      <a href="https://x.com/" target="_blank" rel="noopener" data-cursor>X</a>
+      <a href="https://x.com/alexpackham" target="_blank" rel="noopener" data-cursor>X</a>
       <a href="https://www.venturewisely.com/" target="_blank" rel="noopener" data-cursor>Substack</a>
       <a href="#top" data-cursor>Back to top ↑</a>
     </div>
