@@ -91,6 +91,51 @@ nav .links .navlink{display:none}
 .btn:hover .arr{transform:translate(3px,-3px)}
 @media(min-width:880px){nav .links .navlink{display:inline-block}}
 
+/* ---------- mobile menu (burger) ---------- */
+.burger{display:none;position:relative;width:38px;height:38px;margin:-8px;padding:0;border:0;background:transparent;
+  z-index:1003;cursor:none}
+@media (hover:none){.burger{cursor:auto}}
+.burger span{position:absolute;left:9px;right:9px;height:1.5px;background:var(--on-ink);border-radius:2px;
+  transition:transform .42s var(--ease),opacity .28s var(--ease)}
+.burger span:nth-child(1){top:16px}
+.burger span:nth-child(2){top:22px}
+body.menu-open .burger span:nth-child(1){transform:translateY(3px) rotate(45deg)}
+body.menu-open .burger span:nth-child(2){transform:translateY(-3px) rotate(-45deg)}
+
+.menu{position:fixed;inset:0;z-index:1001;background:rgba(11,11,12,.9);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  display:flex;flex-direction:column;justify-content:center;padding:calc(var(--gut) + 40px) var(--gut) 0;
+  opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s var(--ease)}
+body.menu-open .menu{opacity:1;visibility:visible}
+.menu-links{display:flex;flex-direction:column;gap:clamp(4px,1.4vh,12px)}
+.menu-links a{font-family:var(--disp);font-weight:340;font-size:clamp(40px,13vw,72px);line-height:1.02;letter-spacing:-.01em;
+  color:var(--on-ink);display:flex;align-items:baseline;gap:16px;position:relative;
+  opacity:0;transform:translateY(26px);transition:opacity .55s var(--ease),transform .55s var(--ease),color .3s}
+.menu-links a i{font-family:var(--mono);font-style:normal;font-size:13px;font-weight:500;color:var(--ember);letter-spacing:.05em;transform:translateY(-.35em)}
+.menu-links a em{font-family:var(--mono);font-style:normal;font-size:.34em;color:var(--on-ink-faint);transform:translateY(-.9em);transition:transform .35s var(--ease),color .3s}
+.menu-links a:hover{color:var(--ember)}
+.menu-links a:hover em{color:var(--ember);transform:translate(4px,-1.1em)}
+body.menu-open .menu-links a{opacity:1;transform:none}
+body.menu-open .menu-links a:nth-child(1){transition-delay:.1s}
+body.menu-open .menu-links a:nth-child(2){transition-delay:.17s}
+body.menu-open .menu-links a:nth-child(3){transition-delay:.24s}
+body.menu-open .menu-links a:nth-child(4){transition-delay:.31s}
+.menu-foot{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(28px,6vh,52px);
+  display:flex;flex-wrap:wrap;gap:14px 22px;padding-top:22px;border-top:1px solid var(--line-ink);
+  font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--on-ink-dim);
+  opacity:0;transition:opacity .5s var(--ease) .38s}
+body.menu-open .menu-foot{opacity:1}
+.menu-foot a{transition:color .3s}
+.menu-foot a:hover{color:var(--on-ink)}
+body.menu-open nav{background:transparent;backdrop-filter:none;border-color:transparent}
+@media(max-width:879px){
+  nav .links{display:none}
+  .burger{display:block}
+}
+@media (prefers-reduced-motion:reduce){
+  .menu,.menu-links a,.menu-foot{transition-duration:.001s}
+  .menu-links a{transform:none}
+}
+
 /* ---------- hero ---------- */
 .hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:120px var(--gut) 60px;overflow:hidden}
 .hero-aura{position:absolute;inset:0;z-index:0;pointer-events:none;
@@ -291,7 +336,26 @@ nav .links .navlink{display:none}
     <a href="#writing" class="navlink" data-cursor>Essays</a>
     <a href="https://www.venturewisely.com/" target="_blank" rel="noopener" class="btn" data-cursor>Subscribe <span class="arr">↗</span></a>
   </div>
+  <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="menu">
+    <span></span><span></span>
+  </button>
 </nav>
+
+<!-- MOBILE MENU -->
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="menu-links">
+    <a href="https://astp.co" target="_blank" rel="noopener" data-cursor><i>01</i>ASTP Ventures<em>↗</em></a>
+    <a href="#now" data-cursor><i>02</i>Now</a>
+    <a href="#writing" data-cursor><i>03</i>Essays</a>
+    <a href="https://www.venturewisely.com/" target="_blank" rel="noopener" data-cursor><i>04</i>Subscribe<em>↗</em></a>
+  </nav>
+  <div class="menu-foot">
+    <a href="https://www.instagram.com/astpackham/" target="_blank" rel="noopener" data-cursor>Instagram</a>
+    <a href="https://www.tiktok.com/@alexpackham" target="_blank" rel="noopener" data-cursor>TikTok</a>
+    <a href="https://www.linkedin.com/in/alexpackham/" target="_blank" rel="noopener" data-cursor>LinkedIn</a>
+    <a href="https://x.com/alexpackham" target="_blank" rel="noopener" data-cursor>X</a>
+  </div>
+</div>
 
 <!-- HERO -->
 <header class="hero" id="top">
@@ -502,6 +566,24 @@ document.getElementById('yr').textContent=new Date().getFullYear();
 /* nav scrolled */
 const nav=document.getElementById('nav');
 addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40),{passive:true});
+
+/* mobile burger menu */
+(function(){
+  const burger=document.getElementById('burger'), menu=document.getElementById('menu');
+  if(!burger||!menu) return;
+  const setMenu=(open)=>{
+    document.body.classList.toggle('menu-open',open);
+    burger.setAttribute('aria-expanded',open);
+    burger.setAttribute('aria-label',open?'Close menu':'Open menu');
+    menu.setAttribute('aria-hidden',!open);
+    document.body.style.overflow=open?'hidden':'';
+  };
+  burger.addEventListener('click',()=>setMenu(!document.body.classList.contains('menu-open')));
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+  addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('menu-open'))setMenu(false);});
+  // if resized up to desktop while open, close & unlock
+  matchMedia('(min-width:880px)').addEventListener('change',e=>{if(e.matches)setMenu(false);});
+})();
 
 /* reveal on scroll */
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){
