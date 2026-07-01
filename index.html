@@ -103,10 +103,10 @@ body.menu-open .burger span:nth-child(1){transform:translateY(3px) rotate(45deg)
 body.menu-open .burger span:nth-child(2){transform:translateY(-3px) rotate(-45deg)}
 
 .menu{position:fixed;inset:0;z-index:1001;background:rgba(11,11,12,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
-  display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:calc(var(--gut) + 44px) var(--gut) 0;
+  display:flex;flex-direction:column;justify-content:flex-start;align-items:flex-start;padding:96px var(--gut) 0;
   opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s var(--ease)}
 body.menu-open .menu{opacity:1;visibility:visible}
-.menu-links{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(2px,.8vh,10px);width:100%}
+.menu-links{position:static;display:flex;flex-direction:column;align-items:flex-start;gap:clamp(2px,.8vh,10px);width:100%}
 .menu-links a{font-family:var(--disp);font-weight:360;font-size:clamp(34px,9vw,60px);line-height:1.08;letter-spacing:-.01em;
   color:var(--on-ink);display:inline-flex;align-items:center;gap:14px;white-space:nowrap;
   opacity:0;transform:translateY(22px);transition:opacity .55s var(--ease),transform .55s var(--ease),color .3s}
